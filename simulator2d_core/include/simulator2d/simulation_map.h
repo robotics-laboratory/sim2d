@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-namespace truck::simulator {
+namespace simulator2d {
 
 namespace bg = boost::geometry;
 namespace bgi = boost::geometry::index;
@@ -39,4 +39,4 @@ std::vector<float> getLidarRanges(
     const SimulationMap& map, const geom::Pose& lidar_pose, const model::Lidar& lidar,
     double precision);
 
-}  // namespace truck::simulator
+}  // namespace simulator2d

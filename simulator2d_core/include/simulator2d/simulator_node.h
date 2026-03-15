@@ -97,7 +97,7 @@ handleControl уходит в адаптер
 publishTelemetryMessage и publishSimulationStateMessage уходят в адаптер
 struct Slots с подписчиком на Control
 из Signals убраны telemetry и state
-namespace изменён с truck::simulator на simulator2d
+namespace изменён с simulator2d на simulator2d
 
 Добавлено:
 setControl()

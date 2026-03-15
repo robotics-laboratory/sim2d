@@ -1,9 +1,9 @@
-#include "simulator_2d/truck_state.h"
+#include "simulator2d/truck_state.h"
 
 #include <algorithm>
 #include <cmath>
 
-namespace truck::simulator {
+namespace simulator2d {
 
 StatusCode TruckState::status() const { return cache_.status; }
 
@@ -103,4 +103,4 @@ TruckState& TruckState::accelLinearAcceleration(const geom::Vec3& linear_acceler
     return *this;
 }
 
-}  // namespace truck::simulator
+}  // namespace simulator2d

@@ -13,8 +13,13 @@ find_package(sensor_msgs REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(Boost REQUIRED)
 find_package(ament_index_cpp REQUIRED)
+find_package(model REQUIRED)
+find_package(geom REQUIRED)
+find_package(map REQUIRED)
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
 
-# engine — чистая физика, без ROS-ноды
+# engine —  физика, без ROS-ноды
 add_library(simulator2d_core SHARED
     src/simulator_engine.cpp
     src/truck_state.cpp
@@ -22,7 +27,13 @@ add_library(simulator2d_core SHARED
 )
 ament_target_dependencies(simulator2d_core
     tf2
+    tf2_geometry_msgs
     Boost
+    Eigen3
+    model
+    geom
+    map
+    yaml_cpp_vendor
 )
 target_include_directories(simulator2d_core
     PUBLIC
@@ -54,6 +65,8 @@ ament_target_dependencies(${PROJECT_NAME}_node
     rosgraph_msgs
     sensor_msgs
     nlohmann_json
+    model
+    geom
 )
 target_link_libraries(${PROJECT_NAME}_node simulator2d_core)
 install(TARGETS ${PROJECT_NAME}_node DESTINATION lib/${PROJECT_NAME})
@@ -69,6 +82,7 @@ if(BUILD_TESTING)
     ament_target_dependencies(${PROJECT_NAME}_tests
         rclcpp
         ament_index_cpp
+        map
     )
     target_link_libraries(${PROJECT_NAME}_tests simulator2d_core)
 endif()

@@ -1,4 +1,4 @@
-#include "simulator_2d/status_code.h"
+#include "simulator2d/status_code.h"
 
 #include "model/model.h"
 #include "geom/angle.h"
@@ -8,7 +8,7 @@
 
 #include <vector>
 
-namespace truck::simulator {
+namespace simulator2d {
 
 class TruckState {
   public:
@@ -61,4 +61,4 @@ class TruckState {
     } cache_;
 };
 
-}  // namespace truck::simulator
+}  // namespace simulator2d

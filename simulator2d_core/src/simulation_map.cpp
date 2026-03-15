@@ -1,4 +1,4 @@
-#include "simulator_2d/simulation_map.h"
+#include "simulator2d/simulation_map.h"
 
 #include "geom/bounding_box.h"
 #include "geom/distance.h"
@@ -11,7 +11,7 @@
 #include <cmath>
 #include <limits>
 
-namespace truck::simulator {
+namespace simulator2d {
 
 void SimulationMap::initializeRTree() {
     IndexSegments segments;
@@ -155,4 +155,4 @@ std::vector<float> getLidarRanges(
     return ranges;
 }
 
-}  // namespace truck::simulator
+}  // namespace simulator2d

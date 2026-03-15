@@ -1,7 +1,7 @@
 #pragma once
 
-namespace truck::simulator {
+namespace simulator2d {
 
 enum class StatusCode { IN_PROGRESS, OK, COLLISION };
 
-}  // namespace truck::simulator
+}  // namespace simulator2d

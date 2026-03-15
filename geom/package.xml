@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>geom</name>
+  <version>0.1.0</version>
+  <description>Geometry library</description>
+  <maintainer email="aitsyganok@yandex.ru">Andrey Tsyganok</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>common</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>CGAL</depend>
+  <depend>Boost</depend>
+  <depend>Eigen3</depend>
+</package>

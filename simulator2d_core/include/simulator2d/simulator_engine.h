@@ -1,6 +1,6 @@
-#include "simulator_2d/simulation_map.h"
-#include "simulator_2d/status_code.h"
-#include "simulator_2d/truck_state.h"
+#include "simulator2d/simulation_map.h"
+#include "simulator2d/status_code.h"
+#include "simulator2d/truck_state.h"
 
 #include "model/model.h"
 #include "geom/angle.h"
@@ -17,7 +17,9 @@
 #include <string>
 #include <vector>
 
-namespace truck::simulator {
+#include <tf2/LinearMath/Transform.h>
+
+namespace simulator2d {
 
 struct NoiseGeneratorParams {
     struct Lidar {
@@ -135,4 +137,4 @@ class SimulatorEngine {
     SimulationMap map_;
 };
 
-}  // namespace truck::simulator
+}  // namespace simulator2d

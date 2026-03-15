@@ -1,4 +1,4 @@
-#include "simulator_2d/simulator_engine.h"
+#include "simulator2d/simulator_engine.h"
 
 #include "geom/distance.h"
 #include "geom/intersection.h"
@@ -14,7 +14,7 @@
 #include <limits>
 #include <utility>
 
-namespace truck::simulator {
+namespace simulator2d {
 
 const double kFreeFallAcceleration = 9.81;  // m/s^2
 
@@ -80,17 +80,31 @@ void SimulatorEngine::initializeMathCache(double integration_step) {
 }
 
 void SimulatorEngine::initializeLidarCache() {
-    const auto lidar_translation = model_->getLatestTranform("rear_axle", "lidar_link").getOrigin();
-    cache_.rear_to_lidar.x = lidar_translation.x();
-    cache_.rear_to_lidar.y = lidar_translation.y();
+    // const auto lidar_translation = model_->getLatestTranform("rear_axle", "lidar_link").getOrigin();
+    // cache_.rear_to_lidar.x = lidar_translation.x();
+    // cache_.rear_to_lidar.y = lidar_translation.y();
+    cache_.rear_to_lidar.x = 0.0;
+    cache_.rear_to_lidar.y = 0.0;
 }
 
 void SimulatorEngine::initializeImuCache() {
-    const auto imu_tf = model_->getLatestTranform("base", "camera_imu_optical_frame");
-    cache_.rear_to_imu_translation.x = imu_tf.getOrigin().x() + model_->wheelBase().base_to_rear;
-    cache_.rear_to_imu_translation.y = imu_tf.getOrigin().y();
+    // const auto imu_tf = model_->getLatestTranform("base", "camera_imu_optical_frame");
+    // cache_.rear_to_imu_translation.x = imu_tf.getOrigin().x() + model_->wheelBase().base_to_rear;
+    // cache_.rear_to_imu_translation.y = imu_tf.getOrigin().y();
+    // cache_.base_to_hyro_rotation.setOrigin({0, 0, 0});
+    // cache_.base_to_hyro_rotation.setRotation(imu_tf.getRotation());
+
+    // Из model.yaml: base->camera_link (0.25, 0.05) + camera_link→camera_gyro_frame (-0.01602, -0.03022)
+    const double imu_x = 0.25 + (-0.01602);
+    const double imu_y = 0.05 + (-0.03022);
+    cache_.rear_to_imu_translation.x = imu_x + model_->wheelBase().base_to_rear;
+    cache_.rear_to_imu_translation.y = imu_y;
+
+    // Rotation из model.yaml: camera_gyro_frame→camera_imu_optical_frame
+    // quaternion: x=-0.5, y=0.5, z=-0.5, w=0.5
+    tf2::Quaternion q(-0.5, 0.5, -0.5, 0.5);
     cache_.base_to_hyro_rotation.setOrigin({0, 0, 0});
-    cache_.base_to_hyro_rotation.setRotation(imu_tf.getRotation());
+    cache_.base_to_hyro_rotation.setRotation(q);
 }
 
 void SimulatorEngine::resetRear(
@@ -443,4 +457,4 @@ void SimulatorEngine::advance(double seconds) {
     checkForCollisions();
 }
 
-}  // namespace truck::simulator
+}  // namespace simulator2d
